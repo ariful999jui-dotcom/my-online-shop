@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="আমাদের অনলাইন দোকানে পছন্দের পণ্য কিনুন।">
+  <title>My Online Shop</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      color: #172033;
+    }
+    header {
+      background: #123c32;
+      color: white;
+      text-align: center;
+      padding: 24px 14px;
+    }
+    header h1 { margin: 0 0 8px; }
+    header p { margin: 0; }
+    .intro {
+      text-align: center;
+      padding: 24px 12px 8px;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      padding: 14px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .product {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px #00000010;
+      padding-bottom: 14px;
+    }
+    .product img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      background: #e5e7eb;
+    }
+    .product h3, .product p {
+      margin: 10px 12px;
+    }
+    .price {
+      color: #087443;
+      font-weight: bold;
+    }
+    .order {
+      display: block;
+      margin: 12px;
+      padding: 11px 6px;
+      text-align: center;
+      text-decoration: none;
+      color: white;
+      background: #16834a;
+      border-radius: 7px;
+      font-weight: bold;
+    }
+    .contact {
+      text-align: center;
+      padding: 24px 12px;
+    }
+    footer {
+      text-align: center;
+      padding: 18px;
+      background: #123c32;
+      color: white;
+    }
+    @media (min-width: 650px) {
+      .products { grid-template-columns: repeat(3, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>My Online Shop</h1>
+    <p>আপনার পছন্দের পণ্য, সহজে অর্ডার করুন!</p>
+  </header>
+
+  <section class="intro">
+    <h2>আমাদের পণ্যসমূহ</h2>
+    <p>পণ্য পছন্দ করুন, অর্ডার করতে বোতামে চাপ দিন।</p>
+  </section>
+
+  <main class="products" id="products"></main>
+
+  <section class="contact">
+    <h2>যোগাযোগ</h2>
+    <p>পণ্য সম্পর্কে জানতে আমাদের WhatsApp-এ মেসেজ করুন।</p>
+  </section>
+
+  <footer>
+    © <span id="year"></span> My Online Shop
+  </footer>
+
+  <script>
+    // নিজের দোকানের তথ্য এখানে পরিবর্তন করুন
+    const shopName = "My Online Shop";
+    const whatsappNumber = "8801XXXXXXXXX";
+
+    const products = [
+      {
+        name: "প্রিমিয়াম পণ্য ১",
+        price: 550,
+        description: "আপনার পণ্যের বিবরণ এখানে লিখুন।",
+        image: "https://placehold.co/600x600/e8f5ee/123c32?text=Product+1"
+      },
+      {
+        name: "প্রিমিয়াম পণ্য ২",
+        price: 750,
+        description: "আপনার পণ্যের বিবরণ এখানে লিখুন।",
+        image: "https://placehold.co/600x600/e8f5ee/123c32?text=Product+2"
+      },
+      {
+        name: "প্রিমিয়াম পণ্য ৩",
+        price: 950,
+        description: "আপনার পণ্যের বিবরণ এখানে লিখুন।",
+        image: "https://placehold.co/600x600/e8f5ee/123c32?text=Product+3"
+      }
+    ];
+
+    const container = document.getElementById("products");
+
+    products.forEach((product) => {
+      const message = `আসসালামু আলাইকুম, ${shopName} থেকে ${product.name} অর্ডার করতে চাই। দাম: ৳${product.price}`;
+      const orderLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+      const card = document.createElement("article");
+      card.className = "product";
+
+      const img = document.createElement("img");
+      img.src = product.image;
+      img.alt = product.name;
+      img.loading = "lazy";
+
+      const title = document.createElement("h3");
+      title.textContent = product.name;
+
+      const description = document.createElement("p");
+      description.textContent = product.description;
+
+      const price = document.createElement("p");
+      price.className = "price";
+      price.textContent = `৳${product.price}`;
+
+      const order = document.createElement("a");
+      order.className = "order";
+      order.href = orderLink;
+      order.target = "_blank";
+      order.rel = "noopener noreferrer";
+      order.textContent = "WhatsApp-এ অর্ডার";
+
+      card.append(img, title, description, price, order);
+      container.appendChild(card);
+    });
+
+    document.title = shopName;
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
+</body>
+  </html>
+  
